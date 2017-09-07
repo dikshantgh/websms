@@ -1,0 +1,27 @@
+{% extends 'sms/base.html' %}
+{% block content %}
+
+<center>
+ <title>{% block title %}SENT MESSAGES{% endblock %}</title>
+<table class="table table-bordered">
+  <thead >
+    <tr>
+      <th>Receiver</th>
+      <th>Date</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  {% for query in object_list %}
+  <tbody>
+    <tr>
+      <td>{{query.receiver}}</td>
+      <td>{{query.date}}</td>
+       <td>{{query.message}}<a href = "{% url 'sms:msg_delete_page' query.id %}">
+  <button type="button" class="btn btn-secondary">Delete </button></a></td>
+      
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'sms/base.html' %}
+{% block content %}
+
+<center>
+ <title>{% block title %}GROUPS{% endblock %}</title>
+ 
+<table class="table table-bordered">
+  <thead >
+    <tr>
+      <th>Groups: Select your desired groups and Submit <p class="text-center"> Click.<i class="fa fa-hand-o-up" style="font-size:20px"></i></p> 
+      <a href ="{% url 'sms:group_create' %}" class="btn btn-outline-dark"> Click here to create a group </a>
+
+      </th>
+    </tr>
+  </thead>
+    {% for query in object_list %}
+  <form action="{% url 'sms:group_msg_send'  query.id%}" method="GET">
+{% csrf_token %}
+
+  <tbody >
+    <tr>
+      <td>
+    
+    <input type="checkbox" name="choice" id="choice{{ forloop.counter }}" value="{{ query.id }}" />
+    <label for="choice{{ forloop.counter }}"><strong>{{ query.name|title }}</strong> 
+
+     
+         
+    <a href = "{% url 'sms:group_update_page' query.id %}"> </input>
+	<button type="button" class= "badge badge-secondary" >Update</button></a>
+	<a href = "{% url 'sms:group_delete_page' query.id %}">
+	<button type="button" class="badge badge-dark" >Delete </button></a>
+	
+  </label>
+      </td>
+    </tr>
+
+  </tbody>
+
+
+{% endfor %}
+  <button class="btn btn-outline-dark" type="submit" style="float: center;" >Submit</button>
+
+</form>
+ 
+</table>
+
+{% if messages %}
+<div class="alert alert-success" role ='alert'>
+    {% for m in messages %}
+    {% if message.tags %} class="{{ message.tags }}"{% endif %}{{ m }}
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

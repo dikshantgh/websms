@@ -1,0 +1,31 @@
+{% extends 'sms/base.html' %}
+{% block content %}
+
+
+ <h3>Group Page :</h3>
+<form " action=''  method='POST'>
+{% csrf_token %}
+{% for field in form %}
+  <div>
+     
+  <label>{{ field.label_tag }}</label>
+  </div>
+  <div>
+      {{ field }}
+      
+  </div>
+{{ field.help_text }}
+{% endfor %}
+{% if form.errors %}
+<p><font color="red">please check your number.</font></p>
+{% endif %}
+
+    <div>
+      <button type="submit" class= "btn btn-outline-dark" >Save</button>
+    </div>
+  </div>
+</form>
+
+    
+
+{% endblock %}

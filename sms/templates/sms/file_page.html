@@ -1,0 +1,34 @@
+{% extends 'sms/base.html' %}
+{% block content %}
+
+<form enctype="multipart/form-data"  action=''   method='POST' >
+{% csrf_token %}
+{% for field in form %}
+  <div>
+     
+  <label>{{ field.label_tag }}</label>
+  </div>
+  <div>
+      {{ field }}
+
+  </div>
+
+{% endfor %}
+{% if form.errors %}
+        <p><font color="red">please check your file format.</font></p>
+{% endif %}
+    <div>
+      <button type="submit" class="btn btn-outline-dark" >Save</button>
+    </div>
+  </div>
+</form>
+
+{% if messages %}
+<div class="alert alert-success" role ='alert'>
+    {% for m in messages %}
+    {% if message.tags %} class="{{ message.tags }}"{% endif %}{{ m }}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

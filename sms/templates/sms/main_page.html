@@ -1,0 +1,41 @@
+{% extends 'sms/base.html' %}
+{% block content %}
+
+{% if messages %}
+<div class="alert alert-success" role ='alert'>
+    {% for m in messages %}
+    {% if message.tags %} class="{{ message.tags }}"{% endif %}{{ m }}
+    {% endfor %}
+</div>
+{% endif %}
+
+<center>
+  <p class="bg-light">Fill Up the form to send the sms.</p>
+
+<form class="form-group" class ="form" action=''  method='POST' >
+{% csrf_token %}<br>Character Limit : 120<br>
+{% for field in form %}
+  <div>
+  <label>{{ field.label_tag }}</label>
+  </div>
+    <div >
+    {{ field }} 
+    </div>
+    {{ field.help_text }}
+{% endfor %}
+{% if form.errors %}
+        <p><font color="red">please check your number.</font></p>
+{% endif %}
+  <div>
+    <button class = "btn btn-outline-dark" type="submit">SEND</button>
+    </div>
+  </div>
+</form>
+</center>
+
+
+
+ 
+{% endblock %}
+
+
