@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import tablib
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django import forms
 from django.views.generic.edit import FormMixin
@@ -12,24 +13,21 @@ from sms.forms import MessageSendForm , GroupForm,FileForm
 # Create your views here.
 
 
-class MessageSendView(SuccessMessageMixin,CreateView):
+class MessageSendView(LoginRequiredMixin,SuccessMessageMixin,CreateView):
 
     template_name = "sms/main_page.html"
     form_class = MessageSendForm
     success_url = reverse_lazy('sms:main_page')
     success_message = 'Message sent successfully'
-   
-     
      
 
-class SentView(ListView):
+class SentView(LoginRequiredMixin,ListView):
 
     model = Message
     template_name = "sms/sent_page.html"
     
-    
 
-class GroupCreateView(CreateView):
+class GroupCreateView(LoginRequiredMixin,CreateView):
 
     template_name = "sms/group_create.html"
     form_class = GroupForm
@@ -41,15 +39,15 @@ class SmsOptionView(TemplateView):
     template_name = 'sms/sms_option_page.html'
 
 
-class GroupShowView(ListView):
+class GroupShowView(LoginRequiredMixin,ListView):
 
     model = Group
     template_name = "sms/group_show_page.html"
     success_url   = reverse_lazy("sms:main_page")
-    form_class = GroupForm
+    
 
     
-class GroupUpdateView(UpdateView):
+class GroupUpdateView(LoginRequiredMixin,UpdateView):
 
     model = Group
     template_name = "sms/group_create.html"
@@ -58,14 +56,14 @@ class GroupUpdateView(UpdateView):
     success_message = 'Message sent successfully'
 
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(LoginRequiredMixin,DeleteView):
 
     model = Group
     template_name = "sms/group_delete.html"
     success_url = reverse_lazy('sms:group_show_page')
 
     
-class FileUploadView(CreateView):
+class FileUploadView(LoginRequiredMixin,CreateView):
 
     template_name = "sms/file_page.html"
     form_class = FileForm
@@ -87,7 +85,7 @@ class FileUploadView(CreateView):
         return super(FileUploadView, self).form_valid(form)
 
   
-class GroupSendView(SuccessMessageMixin,CreateView):
+class GroupSendView(LoginRequiredMixin,SuccessMessageMixin,CreateView):
 
     template_name = "sms/group_msg_send.html"
     form_class = MessageSendForm
@@ -126,7 +124,7 @@ class GroupSendView(SuccessMessageMixin,CreateView):
         return context   
       
     
-class FileSendView(SuccessMessageMixin,CreateView):
+class FileSendView(LoginRequiredMixin,SuccessMessageMixin,CreateView):
 
     template_name = "sms/file_send_page.html"
     form_class = MessageSendForm
@@ -141,7 +139,7 @@ class FileSendView(SuccessMessageMixin,CreateView):
         return initials
 
 
-class MessageDeleteView(DeleteView):
+class MessageDeleteView(LoginRequiredMixin,DeleteView):
 
     model = Message
     template_name = "sms/msg_delete_page.html"

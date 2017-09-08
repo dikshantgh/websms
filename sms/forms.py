@@ -3,8 +3,6 @@ import csv
 import re
 from sms.models import Message,Group,File
 
-
-
 class MessageSendForm(forms.ModelForm):
 
 	receiver = forms.RegexField(regex=r'^([9]\d{9},)*[9]\d{9}$',required = True,help_text="enter single number or numbers separated by comma" )
@@ -28,7 +26,7 @@ class MessageSendForm(forms.ModelForm):
 	class Meta:
 		model = Message
 		fields = ['message','receiver']
-	
+
 
 class GroupForm(forms.ModelForm):
 
@@ -39,7 +37,6 @@ class GroupForm(forms.ModelForm):
 	class Meta:
 		model = Group
 		fields = ['name','number']
-
 
 
 class FileForm(forms.ModelForm):
@@ -54,5 +51,3 @@ class FileForm(forms.ModelForm):
 	class Meta:
 		model = File
 		fields = ('file',)
-
-	
