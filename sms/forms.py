@@ -13,10 +13,9 @@ class MessageSendForm(forms.ModelForm):
 		numbers = self.data.get('receiver')
 		msg = self.cleaned_data['message']
 		number_list = numbers.split(',')
-		print(number_list)
 		if ',' in numbers:			
 		 	for num in number_list:
-		 		msg_obj = Message(message=num, receiver=num)
+		 		msg_obj = Message(message=msg, receiver=num)
 		 		msg_obj.save()
 		
 	# # 	#Message.objects.get('').delete()
