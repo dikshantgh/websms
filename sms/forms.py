@@ -10,17 +10,16 @@ class MessageSendForm(forms.ModelForm):
 
 	def clean(self):
 	
-		# numbers = self.cleaned_data['receiver']
-		# msg = self.cleaned_data['message']
-		# number_list = numbers.split(',')
-		# print(number_list)
-		# if ',' in numbers:			
-		#  	for num in number_list:
-		#  		msg_obj = Message(message=msg, receiver=num)
-		#  		msg_obj.save()
-		# if len(numbers) !=10 :
-		# 	raise forms.ValidationError("You have not ten digit number!")
-	# 	#Message.objects.get('').delete()
+		numbers = self.data.get('receiver')
+		msg = self.cleaned_data['message']
+		number_list = numbers.split(',')
+		print(number_list)
+		if ',' in numbers:			
+		 	for num in number_list:
+		 		msg_obj = Message(message=receiver, receiver=num)
+		 		msg_obj.save()
+		
+	# # 	#Message.objects.get('').delete()
 	# 	#(Message.objects.all()[Message.objects.count()-1]).delete()
 		return self.cleaned_data
 
