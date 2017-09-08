@@ -16,7 +16,7 @@ class MessageSendForm(forms.ModelForm):
 		print(number_list)
 		if ',' in numbers:			
 		 	for num in number_list:
-		 		msg_obj = Message(message=receiver, receiver=num)
+		 		msg_obj = Message(message=num, receiver=num)
 		 		msg_obj.save()
 		
 	# # 	#Message.objects.get('').delete()
