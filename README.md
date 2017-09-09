@@ -1,2 +1,1 @@
-# websms
-websms without gateway
+WebSms 1.0
