@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-import tablib
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django import forms
@@ -26,6 +25,9 @@ class SentView(LoginRequiredMixin,ListView):
     model = Message
     template_name = "sms/sent_page.html"
     
+    # def get_queryset(self):
+    #     return Message.objects.filter(sender=self.request.user)
+    
 
 class GroupCreateView(LoginRequiredMixin,CreateView):
 
@@ -44,6 +46,9 @@ class GroupShowView(LoginRequiredMixin,ListView):
     model = Group
     template_name = "sms/group_show_page.html"
     success_url   = reverse_lazy("sms:main_page")
+
+    # def get_queryset(self):
+    #     return Group.objects.filter(sender=self.request.user)
     
 
     
